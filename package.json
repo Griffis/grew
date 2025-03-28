@@ -1,0 +1,78 @@
+{
+  "name": "mingo",
+  "version": "6.5.5",
+  "description": "MongoDB query language for in-memory objects",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "scripts": {
+    "prepare": "husky install",
+    "docs": "typedoc --entryPointStrategy expand src/ && touch docs/.nojekyll",
+    "build": "npm run clean && node ./build.js",
+    "postbuild": "tsc",
+    "clean": "rm -fr build",
+    "test": "jest",
+    "release": "npm run test && npm run build && cd build && npm publish",
+    "prepublishOnly": "echo \"use 'npm run release'\" && false",
+    "postinstall": "node ./build.js install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kofrasa/mingo.git"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "devDependencies": {
+    "@eslint/compat": "^1.2.3",
+    "@types/jest": "^29.2.5",
+    "@types/node": "^22.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
+    "ajv": "^8.12.0",
+    "esbuild": "^0.25.0",
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^10.0.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-simple-import-sort": "^12.0.0",
+    "eslint-plugin-unused-imports": "^4.0.0",
+    "glob": "^11.0.0",
+    "husky": "^9.0.0",
+    "jest": "^29.3.1",
+    "lint-staged": "^15.0.0",
+    "perf_hooks": "^0.0.1",
+    "prettier": "^3.0.0",
+    "ts-jest": "^29.0.3",
+    "ts-node": "^10.9.2",
+    "typedoc": "^0.27.0",
+    "typescript": "^5.2.2"
+  },
+  "keywords": [
+    "util",
+    "mongo",
+    "nosql",
+    "query",
+    "aggregate",
+    "filter",
+    "group",
+    "project",
+    "search",
+    "transform",
+    "update",
+    "modify"
+  ],
+  "author": {
+    "name": "Francis Asante",
+    "email": "kofrasa@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kofrasa/mingo/issues"
+  },
+  "lint-staged": {
+    "*.ts": "eslint --cache --fix"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "extends": ["config:recommended", "schedule:monthly", "group:all"],
+  "ignoreUnstable": true,
+  "automerge": false,
+  "automergeType": "branch",
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "groupName": "codecov",
+      "matchPackageNames": ["/codecov/"]
+    },
+    {
+      "groupName": "eslint",
+      "matchPackageNames": ["/eslint/"]
+    },
+    {
+      "groupName": "lodash",
+      "matchPackageNames": ["/lodash/"]
+    },
+    {
+      "groupName": "nyc",
+      "matchPackageNames": ["/nyc/"]
+    },
+    {
+      "groupName": "perf_hooks",
+      "matchPackageNames": ["/perf_hooks/"]
+    },
+    {
+      "groupName": "tape",
+      "matchPackageNames": ["/tape/"]
+    },
+    {
+      "groupName": "typescript",
+      "matchPackageNames": ["/typescript/"]
+    }
+  ]
+}
