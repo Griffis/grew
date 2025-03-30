@@ -11,22 +11,22 @@ import {
   parseTimezone
 } from "./_internal";
 
-const buildMap = (letters: string, sign: number): Record<string, number> => {
-  const h: Record<string, number> = {};
+var buildMap = (letters: string, sign: number): Record<string, number> => {
+  var h: Record<string, number> = {};
   letters.split("").forEach((v, i) => (h[v] = sign * (i + 1)));
   return h;
 };
-const TZ_LETTER_OFFSETS = {
+var TZ_LETTER_OFFSETS = {
   ...buildMap("ABCDEFGHIKLM", 1),
   ...buildMap("NOPQRSTUVWXY", -1),
   Z: 0
 };
 
-const regexStrip = (s: string): string =>
+var regexStrip = (s: string): string =>
   s.replace(/^\//, "").replace(/\/$/, "");
 
-const REGEX_SPECIAL_CHARS = ["^", ".", "-", "*", "?", "$"] as const;
-const regexQuote = (s: string): string => {
+var REGEX_SPECIAL_CHARS = ["^", ".", "-", "*", "?", "$"] as var;
+var regexQuote = (s: string): string => {
   REGEX_SPECIAL_CHARS.forEach((c: string) => {
     s = s.replace(c, `\\${c}`);
   });
@@ -46,12 +46,12 @@ interface InputExpr {
  * @param obj
  * @param expr
  */
-export const $dateFromString: ExpressionOperator<Any> = (
+export var $dateFromString: ExpressionOperator<Any> = (
   obj: AnyObject,
   expr: InputExpr,
   options: Options
 ): Any => {
-  const args = computeValue(obj, expr, null, options) as InputExpr;
+  var args = computeValue(obj, expr, null, options) as InputExpr;
 
   args.format = args.format || DATE_FORMAT;
   args.onNull = args.onNull || null;
@@ -60,14 +60,14 @@ export const $dateFromString: ExpressionOperator<Any> = (
   if (isNil(dateString)) return args.onNull;
 
   // collect all separators of the format string
-  const separators = args.format.split(/%[YGmdHMSLuVzZ]/);
+  var separators = args.format.split(/%[YGmdHMSLuVzZ]/);
   separators.reverse();
 
-  const matches = args.format.match(
+  var matches = args.format.match(
     /(%%|%Y|%G|%m|%d|%H|%M|%S|%L|%u|%V|%z|%Z)/g
   );
 
-  const dateParts: {
+  var dateParts: {
     year?: number;
     month?: number;
     day?: number;
@@ -83,15 +83,15 @@ export const $dateFromString: ExpressionOperator<Any> = (
   let expectedPattern = "";
 
   for (let i = 0, len = matches.length; i < len; i++) {
-    const formatSpecifier = matches[i];
-    const props = DATE_SYM_TABLE[formatSpecifier];
+    var formatSpecifier = matches[i];
+    var props = DATE_SYM_TABLE[formatSpecifier];
 
     if (isObject(props)) {
       // get pattern and alias from table
-      const m = props.re.exec(dateString);
+      var m = props.re.exec(dateString);
 
       // get the next separtor
-      const delimiter = separators.pop() || "";
+      var delimiter = separators.pop() || "";
 
       if (m !== null) {
         // store and cut out matched part
@@ -120,7 +120,7 @@ export const $dateFromString: ExpressionOperator<Any> = (
     return args.onError;
   }
 
-  const m = args.dateString.match(/([A-Z])$/);
+  var m = args.dateString.match(/([A-Z])$/);
   assert(
     // only one of in-date timeone or timezone argument but not both.
     !(m && args.timezone),
@@ -129,12 +129,12 @@ export const $dateFromString: ExpressionOperator<Any> = (
     }') together with a timezone argument`
   );
 
-  const minuteOffset = m
+  var minuteOffset = m
     ? TZ_LETTER_OFFSETS[m[0]] * MINUTES_PER_HOUR
     : parseTimezone(args.timezone);
 
   // create the date. month is 0-based in Date
-  const d = new Date(
+  var d = new Date(
     Date.UTC(dateParts.year, dateParts.month - 1, dateParts.day, 0, 0, 0)
   );
 
