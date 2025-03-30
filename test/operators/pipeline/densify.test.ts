@@ -1,6 +1,6 @@
 import * as samples from "../../support";
 
-const exampleData = [
+let exampleData = [
   {
     altitude: 600,
     variety: "Arabica Typica",
