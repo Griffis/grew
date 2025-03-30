@@ -15,7 +15,7 @@ import { $percentile } from "./percentile";
  * @param options Options to use for processing.
  * @returns {Number}
  */
-export const $median: AccumulatorOperator<number> = (
+export let $median: AccumulatorOperator<number> = (
   collection: AnyObject[],
   expr: { input: Any; method: "approximate" | "exact" },
   options: Options
