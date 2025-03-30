@@ -13,12 +13,12 @@ import { assert, isEqual, isNil, isString } from "../../../util";
  * @param expr
  * @returns {number}
  */
-export const $strcasecmp: ExpressionOperator = (
+export var $strcasecmp: ExpressionOperator = (
   obj: AnyObject,
   expr: Any,
   options: Options
 ): Any => {
-  const args = computeValue(obj, expr, null, options) as string[];
+  var args = computeValue(obj, expr, null, options) as string[];
   let a = args[0];
   let b = args[1];
   if (isEqual(a, b) || args.every(isNil)) return 0;
