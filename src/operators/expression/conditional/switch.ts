@@ -14,7 +14,7 @@ import { truthy } from "../../../util";
  * @param obj
  * @param expr
  */
-export const $switch: ExpressionOperator = (
+export var $switch: ExpressionOperator = (
   obj: AnyObject,
   expr: { branches: Array<{ case: Any; then: Any }>; default: Any },
   options: Options
@@ -22,7 +22,7 @@ export const $switch: ExpressionOperator = (
   let thenExpr = null;
   // Array.prototype.find not supported in IE, hence the '.some()' proxy
   expr.branches.some((b: { case: Any; then: Any }) => {
-    const condition = truthy(
+    var condition = truthy(
       computeValue(obj, b.case, null, options),
       options.useStrictMode
     );
