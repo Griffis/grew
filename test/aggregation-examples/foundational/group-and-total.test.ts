@@ -8,7 +8,7 @@ import { DEFAULT_OPTS, ISODate } from "../../support";
  * See {@link https://www.practical-mongodb-aggregations.com/examples/foundational/group-and-total.html}
  */
 describe("Group & Total", () => {
-  const orders = [
+  let orders = [
     {
       customer_id: "elise_smith@myemail.com",
       orderdate: ISODate("2020-05-30T08:35:52Z"),
@@ -57,7 +57,7 @@ describe("Group & Total", () => {
   ];
 
   it("returns three customers, each showing the customer's first purchase date, the total value of all their orders, the number of orders they made and a list of each order's detail, for 2020 only", () => {
-    const pipeline = [
+    let pipeline = [
       // Match only orders made in 2020
       {
         $match: {
