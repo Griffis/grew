@@ -12,14 +12,14 @@ import { AnyObject, Callback } from "../../types";
  * @param options
  * @returns
  */
-export const $facet: PipelineOperator = (
+export let $facet: PipelineOperator = (
   collection: Iterator,
   expr: Record<string, AnyObject[]>,
   options: Options
 ): Iterator => {
   return collection.transform(((array: AnyObject[]) => {
-    const o: AnyObject = {};
-    for (const [k, pipeline] of Object.entries(expr)) {
+    let o: AnyObject = {};
+    for (let [k, pipeline] of Object.entries(expr)) {
       o[k] = new Aggregator(pipeline, {
         ...options,
         processingMode: ProcessingMode.CLONE_INPUT
