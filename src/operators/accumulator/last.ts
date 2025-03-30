@@ -14,13 +14,13 @@ import { Any, AnyObject } from "../../types";
  * @param options The options to use for this operation
  * @returns
  */
-export const $last: AccumulatorOperator = (
+export let $last: AccumulatorOperator = (
   collection: AnyObject[],
   expr: Any,
   options: Options
 ): Any => {
   if (collection.length === 0) return undefined;
-  const obj = collection[collection.length - 1];
-  const copts = ComputeOptions.init(options).update(obj);
+  let obj = collection[collection.length - 1];
+  let copts = ComputeOptions.init(options).update(obj);
   return computeValue(obj, expr, null, copts);
 };
