@@ -10,7 +10,7 @@ import { DEFAULT_OPTS, ISODate } from "../../support";
  * See {@link https://www.practical-mongodb-aggregations.com/examples/time-series/iot-power-consumption.html}
  */
 describe("IoT Power Consumption", () => {
-  const device_readings = [
+  let device_readings = [
     // 11:29am device readings
     {
       buildingID: "Building-ABC",
@@ -133,7 +133,7 @@ describe("IoT Power Consumption", () => {
   ];
 
   it("calculate the energy an air-conditioning unit has consumed over the last hour for each reading received", () => {
-    const pipelineRawReadings = [
+    let pipelineRawReadings = [
       // Calculate each unit's energy consumed over the last hour for each reading
       {
         $setWindowFields: {
@@ -200,7 +200,7 @@ describe("IoT Power Consumption", () => {
   });
 
   it("compute the total energy consumed by all the air-conditioning units combined in each building for every hour", () => {
-    const pipelineBuildingsSummary = [
+    let pipelineBuildingsSummary = [
       // Calculate each unit's energy consumed over the last hour for each reading
       {
         $setWindowFields: {
