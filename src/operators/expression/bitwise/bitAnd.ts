@@ -8,6 +8,6 @@ import { bitwise } from "./_internal";
  * @param expr Right hand side expression of operator
  * @returns {Number}
  */
-export const $bitAnd = bitwise("$bitAnd", nums =>
+export let $bitAnd = bitwise("$bitAnd", nums =>
   nums.reduce((a, b) => a & b, -1)
 );
