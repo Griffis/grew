@@ -12,17 +12,17 @@ import { assert, isNil, isString } from "../../../util";
  * @param  {AnyObject} obj
  * @param  {Array} expr
  */
-export const $replaceAll: ExpressionOperator = (
+export let $replaceAll: ExpressionOperator = (
   obj: AnyObject,
   expr: Any,
   options: Options
 ): Any => {
-  const args = computeValue(obj, expr, null, options) as {
+  let args = computeValue(obj, expr, null, options) as {
     input: string;
     find: string;
     replacement: string;
   };
-  const arr = [args.input, args.find, args.replacement];
+  let arr = [args.input, args.find, args.replacement];
   if (arr.some(isNil)) return null;
   assert(
     arr.every(isString),
