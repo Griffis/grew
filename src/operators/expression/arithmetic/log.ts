@@ -11,13 +11,13 @@ import { assert, isArray, isNil, isNumber } from "../../../util";
  * @param expr
  * @returns {number}
  */
-export const $log: ExpressionOperator = (
+export let $log: ExpressionOperator = (
   obj: AnyObject,
   expr: Any,
   options: Options
 ): number | null => {
-  const args = computeValue(obj, expr, null, options) as number[];
-  const msg = "$log expression must resolve to array(2) of numbers";
+  let args = computeValue(obj, expr, null, options) as number[];
+  let msg = "$log expression must resolve to array(2) of numbers";
 
   assert(isArray(args) && args.length === 2, msg);
   if (args.some(isNil)) return null;
