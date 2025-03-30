@@ -2,12 +2,12 @@ import { aggregate } from "../../../src";
 import { ProcessingMode } from "../../../src/core";
 import { DEFAULT_OPTS } from "../../support";
 
-const options = {
+let options = {
   ...DEFAULT_OPTS,
   processingMode: ProcessingMode.CLONE_INPUT
 };
 
-const data = [
+let data = [
   {
     _id: 0,
     type: "chocolate",
@@ -61,7 +61,7 @@ const data = [
 describe("operators/window/shift", () => {
   describe("$shift", () => {
     it("Shift Using a Positive Integer", () => {
-      const result = aggregate(
+      let result = aggregate(
         data,
         [
           {
@@ -142,7 +142,7 @@ describe("operators/window/shift", () => {
     });
 
     it("Shift Using a Negative Integer", () => {
-      const result = aggregate(
+      let result = aggregate(
         data,
         [
           {
