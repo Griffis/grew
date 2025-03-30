@@ -11,12 +11,12 @@ import { truthy } from "../../../util";
  * @param obj
  * @param expr
  */
-export const $anyElementTrue: ExpressionOperator = (
+export let $anyElementTrue: ExpressionOperator = (
   obj: AnyObject,
   expr: Any,
   options: Options
 ): Any => {
   // mongodb nests the array expression in another
-  const args = computeValue(obj, expr, null, options)[0] as Any[];
+  let args = computeValue(obj, expr, null, options)[0] as Any[];
   return args.some(v => truthy(v, options.useStrictMode));
 };
