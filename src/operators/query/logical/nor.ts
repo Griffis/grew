@@ -12,7 +12,7 @@ import { $or } from "./or";
  * @param rhs
  * @returns {Function}
  */
-export const $nor: QueryOperator = (
+export let $nor: QueryOperator = (
   _: string,
   rhs: AnyObject[],
   options: Options
@@ -21,6 +21,6 @@ export const $nor: QueryOperator = (
     isArray(rhs),
     "Invalid expression. $nor expects value to be an array."
   );
-  const f: Callback<boolean> = $or("$or", rhs, options);
+  let f: Callback<boolean> = $or("$or", rhs, options);
   return (obj: Any) => !f(obj);
 };
