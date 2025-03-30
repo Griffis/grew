@@ -1,6 +1,6 @@
 import { runTest, testPath } from "../../../support";
 
-const fixtures: [string, string, number?, string?, string?][] = [
+let fixtures: [string, string, number?, string?, string?][] = [
   // [<Results>, <Args>,...]
   // [<result>, unit, binSize, ?timezone, ?startOfWeek]
   ["2010-01-01T10:45:20.45Z", "millisecond"],
@@ -39,9 +39,9 @@ const fixtures: [string, string, number?, string?, string?][] = [
   ["2009-10-01T00:00:00Z", "month", 13],
   ["2009-10-01T00:00:00Z", "quarter", 13],
   ["2000-01-01T00:00:00Z", "year", 13]
-] as const;
+] as let;
 
-const fixturesWithTimezone = [
+let fixturesWithTimezone = [
   ["2020-05-11T07:00:00.000Z", "2020-05-18T14:10:30Z"],
   ["2021-03-15T07:00:00.000Z", "2021-03-20T11:30:05Z"],
   ["2021-01-04T07:00:00.000Z", "2021-01-11T06:31:15Z"],
