@@ -1,6 +1,6 @@
 import * as samples from "../../support";
 
-const docs = [
+let docs = [
   { playerId: "PlayerA", gameId: "G1", score: 31 },
   { playerId: "PlayerB", gameId: "G1", score: 33 },
   { playerId: "PlayerC", gameId: "G1", score: 99 },
