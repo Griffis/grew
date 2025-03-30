@@ -3,7 +3,7 @@ import { ProcessingMode } from "../../../src/core";
 import { DEFAULT_OPTS, runTestPipeline, studentsData } from "../../support";
 
 // english
-const english = [
+let english = [
   { name: "Bob" },
   { name: "Tom" },
   { name: "alice" },
@@ -12,7 +12,7 @@ const english = [
   { name: "100" }
 ];
 
-const french = [
+let french = [
   { name: "a" },
   { name: "B" },
   { name: "b" },
@@ -23,7 +23,7 @@ const french = [
 
 describe("operators/pipeline/sort", () => {
   it("can sort collection with $sort", () => {
-    const result = aggregate(
+    let result = aggregate(
       studentsData,
       [{ $sort: { _id: -1 } }, { $limit: 1 }, { $project: { _id: 1 } }],
       DEFAULT_OPTS
@@ -32,7 +32,7 @@ describe("operators/pipeline/sort", () => {
   });
 
   it("can sort on complex fields", () => {
-    const result = aggregate(
+    let result = aggregate(
       [
         { _id: "c", date: new Date(2018, 1, 1) },
         { _id: "a", date: new Date(2017, 1, 1) },
@@ -49,7 +49,7 @@ describe("operators/pipeline/sort", () => {
   });
 
   it("can sort with collation", () => {
-    const result = aggregate(
+    let result = aggregate(
       [
         { _id: 1, name: "A" },
         { _id: 2, name: "B" },
@@ -75,7 +75,7 @@ describe("operators/pipeline/sort", () => {
   });
 
   it("can sort with locale", () => {
-    const result = aggregate(english, [{ $sort: { name: 1 } }], {
+    let result = aggregate(english, [{ $sort: { name: 1 } }], {
       ...DEFAULT_OPTS,
       collation: {
         locale: "en"
@@ -93,7 +93,7 @@ describe("operators/pipeline/sort", () => {
   });
 
   it("can sort with numeric odering", () => {
-    const result = aggregate(english, [{ $sort: { name: 1 } }], {
+    let result = aggregate(english, [{ $sort: { name: 1 } }], {
       ...DEFAULT_OPTS,
       collation: {
         locale: "en",
