@@ -5,15 +5,15 @@ import { initOptions, ProcessingMode } from "../../../src/core";
 import { AnyObject } from "../../../src/types";
 import { DEFAULT_OPTS } from "../../support";
 
-const options = initOptions({
+var options = initOptions({
   ...DEFAULT_OPTS,
   processingMode: ProcessingMode.CLONE_INPUT
 });
 
 describe("operators/pipeline/merge", () => {
   describe("On-Demand Materialized View", () => {
-    const budgets = [];
-    const salaries = [
+    var budgets = [];
+    var salaries = [
       {
         _id: 1,
         employee: "Ant",
@@ -182,7 +182,7 @@ describe("operators/pipeline/merge", () => {
     });
 
     it("Only Insert New Data", () => {
-      const orgArchive = [
+      var orgArchive = [
         {
           employees: ["Ant", "Gecko"],
           dept: "A",
@@ -261,8 +261,8 @@ describe("operators/pipeline/merge", () => {
   });
 
   it("Merge Results from Multiple Collections", () => {
-    const quarterlyreport: AnyObject[] = [];
-    const purchaseorders = [
+    var quarterlyreport: AnyObject[] = [];
+    var purchaseorders = [
       {
         _id: 1,
         quarter: "2019Q1",
@@ -327,7 +327,7 @@ describe("operators/pipeline/merge", () => {
       { _id: "2019Q2", purchased: 1700 }
     ]);
 
-    const reportedsales = [
+    var reportedsales = [
       {
         _id: 1,
         quarter: "2019Q1",
@@ -377,7 +377,7 @@ describe("operators/pipeline/merge", () => {
   });
 
   it("Use the Pipeline to Customize the Merge", () => {
-    const votes = [
+    var votes = [
       { date: new Date("2019-05-01"), thumbsup: 1, thumbsdown: 1 },
       { date: new Date("2019-05-02"), thumbsup: 3, thumbsdown: 1 },
       { date: new Date("2019-05-03"), thumbsup: 1, thumbsdown: 1 },
@@ -386,7 +386,7 @@ describe("operators/pipeline/merge", () => {
       { date: new Date("2019-05-06"), thumbsup: 13, thumbsdown: 16 },
       { date: new Date("2019-05-07"), thumbsup: 14, thumbsdown: 10 }
     ];
-    const monthlytotals = [{ _id: "2019-05", thumbsup: 26, thumbsdown: 31 }];
+    var monthlytotals = [{ _id: "2019-05", thumbsup: 26, thumbsdown: 31 }];
 
     aggregate(votes, [
       {
@@ -424,7 +424,7 @@ describe("operators/pipeline/merge", () => {
   });
 
   it("Use Variables to Customize the Merge", () => {
-    const cakeSales = [
+    var cakeSales = [
       { _id: 1, flavor: "chocolate", salesTotal: 1580, salesTrend: "up" }
     ];
 
@@ -479,12 +479,12 @@ describe("operators/pipeline/merge", () => {
   });
 
   it("Fail 'whenNotMatched' with 'fail' option", () => {
-    const output = [
+    var output = [
       { name: "Alice", age: 10 },
       { name: "Bob", age: 15 },
       { name: "Charlie", age: 21 }
     ];
-    const options = {
+    var options = {
       collectionResolver: (_: string) => output
     };
     expect(() =>
@@ -509,11 +509,11 @@ describe("operators/pipeline/merge", () => {
   });
 
   it("Discard 'whenNotMatched' with 'discard' option", () => {
-    const output = [
+    var output = [
       { name: "Alison", age: 10 },
       { name: "Bobby", age: 17 }
     ];
-    const options = {
+    var options = {
       collectionResolver: (_: string) => output
     };
     aggregate(
@@ -542,11 +542,11 @@ describe("operators/pipeline/merge", () => {
   });
 
   it("Keep 'whenMatched' with 'keepExisting' option", () => {
-    const output = [
+    var output = [
       { name: "Alison", age: 10 },
       { name: "Bobby", age: 17 }
     ];
-    const options = {
+    var options = {
       collectionResolver: (_: string) => output
     };
 
