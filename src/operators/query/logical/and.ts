@@ -12,7 +12,7 @@ import { assert, isArray } from "../../../util";
  * @param rhs
  * @returns {Function}
  */
-export const $and: QueryOperator = (
+export let $and: QueryOperator = (
   _: string,
   rhs: AnyObject[],
   options: Options
@@ -21,6 +21,6 @@ export const $and: QueryOperator = (
     isArray(rhs),
     "Invalid expression: $and expects value to be an Array."
   );
-  const queries = rhs.map(expr => new Query(expr, options));
+  let queries = rhs.map(expr => new Query(expr, options));
   return (obj: AnyObject) => queries.every(q => q.test(obj));
 };
