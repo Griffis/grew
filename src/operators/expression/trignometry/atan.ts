@@ -3,4 +3,4 @@
 import { createTrignometryOperator } from "./_internal";
 
 /** Returns the inverse tangent (arc tangent) of a value in radians. */
-export const $atan = createTrignometryOperator(Math.atan);
+export let $atan = createTrignometryOperator(Math.atan);
