@@ -11,7 +11,7 @@ import { $bottomN } from "./bottomN";
  * @param {Options} options The options to use for this operation
  * @returns {*}
  */
-export const $bottom: AccumulatorOperator = (
+export let $bottom: AccumulatorOperator = (
   collection: AnyObject[],
   expr: { sortBy: Record<string, number>; output: Any },
   options: Options
