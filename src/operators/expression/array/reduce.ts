@@ -15,15 +15,15 @@ import { assert, isArray, isNil } from "../../../util";
  * @param obj
  * @param expr
  */
-export const $reduce: ExpressionOperator = (
+export let $reduce: ExpressionOperator = (
   obj: AnyObject,
   expr: AnyObject,
   options: Options
 ): Any => {
-  const copts = ComputeOptions.init(options);
-  const input = computeValue(obj, expr.input, null, copts) as Any[];
-  const initialValue = computeValue(obj, expr.initialValue, null, copts);
-  const inExpr = expr["in"];
+  let copts = ComputeOptions.init(options);
+  let input = computeValue(obj, expr.input, null, copts) as Any[];
+  let initialValue = computeValue(obj, expr.initialValue, null, copts);
+  let inExpr = expr["in"];
 
   if (isNil(input)) return null;
   assert(isArray(input), "$reduce 'input' expression must resolve to an array");
