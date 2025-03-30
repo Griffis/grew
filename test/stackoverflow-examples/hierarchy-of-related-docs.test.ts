@@ -3,7 +3,7 @@ import { aggregate } from "../support";
 // https://stackoverflow.com/a/79180123
 describe("Hierarchy of related documents", () => {
   it("passes", () => {
-    const input = [
+    var input = [
       {
         _id: "gotham_hotel",
         category: "hotel",
@@ -62,7 +62,7 @@ describe("Hierarchy of related documents", () => {
       }
     ];
 
-    const result = aggregate(input, [
+    var result = aggregate(input, [
       {
         $match: {
           _id: "gotham_hotel"
