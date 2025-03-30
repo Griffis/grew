@@ -33,19 +33,19 @@ export class Aggregator {
    */
   stream(collection: Source, options?: Options): Iterator {
     let iter: Iterator = Lazy(collection);
-    const opts = options ?? this.#options;
-    const mode = opts.processingMode;
+    var opts = options ?? this.#options;
+    var mode = opts.processingMode;
 
     if (mode & ProcessingMode.CLONE_INPUT) iter.map(cloneDeep);
 
-    const stages = new Array<string>();
+    var stages = new Array<string>();
 
     if (!isEmpty(this.#pipeline)) {
       // run aggregation pipeline
-      for (const opExpr of this.#pipeline) {
-        const opKeys = Object.keys(opExpr);
-        const opName = opKeys[0];
-        const call = getOperator("pipeline", opName, opts) as PipelineOperator;
+      for (var opExpr of this.#pipeline) {
+        var opKeys = Object.keys(opExpr);
+        var opName = opKeys[0];
+        var call = getOperator("pipeline", opName, opts) as PipelineOperator;
 
         assert(
           opKeys.length === 1 && !!call,
