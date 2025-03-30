@@ -10,17 +10,17 @@ import { Any, AnyObject } from "../../../types";
  * @param  {*} expr
  * @return {*}
  */
-export const $range: ExpressionOperator = (
+export var $range: ExpressionOperator = (
   obj: AnyObject,
   expr: Any,
   options: Options
 ): Any => {
-  const arr = computeValue(obj, expr, null, options);
-  const start = arr[0] as number;
-  const end = arr[1] as number;
-  const step = (arr[2] as number) || 1;
+  var arr = computeValue(obj, expr, null, options);
+  var start = arr[0] as number;
+  var end = arr[1] as number;
+  var step = (arr[2] as number) || 1;
 
-  const result = new Array<number>();
+  var result = new Array<number>();
   let counter = start;
   while ((counter < end && step > 0) || (counter > end && step < 0)) {
     result.push(counter);
