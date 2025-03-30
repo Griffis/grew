@@ -5,7 +5,7 @@ import { aggregate } from "../../../src";
 describe("operators/expressions/custom", () => {
   describe("$accumulator", () => {
     it("Use $accumulator to Implement the $avg Operator", () => {
-      const result = aggregate(
+      var result = aggregate(
         [
           { _id: 8751, title: "The Banquet", author: "Dante", copies: 2 },
           { _id: 8752, title: "Divine Comedy", author: "Dante", copies: 1 },
@@ -52,7 +52,7 @@ describe("operators/expressions/custom", () => {
     });
 
     it("Use initArgs to Vary the Initial State by Group", () => {
-      for (const [key, expected] of Object.entries({
+      for (var [key, expected] of Object.entries({
         Bettles: [
           {
             _id: { city: "Bettles" },
@@ -82,7 +82,7 @@ describe("operators/expressions/custom", () => {
           { _id: { city: "Pyote" }, restaurants: ["Crave"] },
         ],
       })) {
-        const result = aggregate(
+        var result = aggregate(
           [
             { _id: 1, name: "Food Fury", city: "Bettles", cuisine: "American" },
             { _id: 2, name: "Meal Macro", city: "Bettles", cuisine: "Chinese" },
@@ -138,13 +138,13 @@ describe("operators/expressions/custom", () => {
 
   describe("$function", () => {
     it("can run $function with arguments", () => {
-      const data = [
+      var data = [
         { _id: 1, name: "Miss Cheevous", scores: [10, 5, 10] },
         { _id: 2, name: "Miss Ann Thrope", scores: [10, 10, 10] },
         { _id: 3, name: "Mrs. Eppie Delta ", scores: [9, 8, 8] },
       ];
 
-      const result = aggregate(data, [
+      var result = aggregate(data, [
         {
           $addFields: {
             isFound: {
