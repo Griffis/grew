@@ -10,7 +10,7 @@ import { $push } from "./push";
  * @param  {AnyObject} expr
  * @return {Number|null}
  */
-export const $stdDevSamp: AccumulatorOperator<number> = (
+export let $stdDevSamp: AccumulatorOperator<number> = (
   collection: AnyObject[],
   expr: Any,
   options: Options
