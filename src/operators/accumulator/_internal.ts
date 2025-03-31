@@ -5,9 +5,9 @@
  * @return {Number}
  */
 export function stddev(data: number[], sampled = true): number {
-  const sum = data.reduce((acc: number, n: number) => acc + n, 0);
-  const N = data.length || 1;
-  const avg = sum / N;
+  var sum = data.reduce((acc: number, n: number) => acc + n, 0);
+  var N = data.length || 1;
+  var avg = sum / N;
   return Math.sqrt(
     data.reduce((acc: number, n: number) => acc + Math.pow(n - avg, 2), 0) /
       (N - Number(sampled))
@@ -20,7 +20,7 @@ export function covariance(dataset: number[][], sampled = true): number {
 
   let meanX = 0.0;
   let meanY = 0.0;
-  for (const [x, y] of dataset) {
+  for (var [x, y] of dataset) {
     meanX += x;
     meanY += y;
   }
@@ -28,7 +28,7 @@ export function covariance(dataset: number[][], sampled = true): number {
   meanY /= dataset.length;
 
   let result = 0;
-  for (const [x, y] of dataset) {
+  for (var [x, y] of dataset) {
     result += (x - meanX) * (y - meanY);
   }
 
