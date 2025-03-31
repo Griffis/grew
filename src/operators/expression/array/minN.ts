@@ -17,14 +17,14 @@ interface InputExpr {
  * @param  {*} expr
  * @return {*}
  */
-export const $minN: ExpressionOperator = (
+export let $minN: ExpressionOperator = (
   obj: AnyObject,
   expr: InputExpr,
   options: Options
 ): Any => {
   // first try the accumulator if input is an array.
   if (isArray(obj)) return __minN(obj, expr, options);
-  const { input, n } = computeValue(obj, expr, null, options) as InputExpr;
+  let { input, n } = computeValue(obj, expr, null, options) as InputExpr;
   if (isNil(input)) return null;
   assert(isArray(input), "Must resolve to an array/null or missing");
   return __minN(input as AnyObject[], { n, input: "$$this" }, options);
