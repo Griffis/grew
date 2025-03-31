@@ -10,12 +10,12 @@ import { assert, isArray, isEqual } from "../../../util";
  * @param {AnyObject} obj
  * @param {Any[]} expr
  */
-export const $in: ExpressionOperator = (
+export let $in: ExpressionOperator = (
   obj: AnyObject,
   expr: Any,
   options: Options
 ): boolean => {
-  const [item, arr] = computeValue(obj, expr, null, options) as [Any, Any[]];
+  let [item, arr] = computeValue(obj, expr, null, options) as [Any, Any[]];
   assert(isArray(arr), "$in second argument must be an array");
   return arr.some(v => isEqual(v, item));
 };
