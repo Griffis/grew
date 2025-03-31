@@ -11,12 +11,12 @@ import { truthy } from "../../../util";
  * @param expr
  * @returns {boolean}
  */
-export const $and: ExpressionOperator = (
+export let $and: ExpressionOperator = (
   obj: AnyObject,
   expr: Any,
   options: Options
 ): Any => {
-  const value = computeValue(obj, expr, null, options) as Any[];
+  let value = computeValue(obj, expr, null, options) as Any[];
   return (
     truthy(value, options.useStrictMode) &&
     value.every(v => truthy(v, options.useStrictMode))
