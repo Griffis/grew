@@ -11,7 +11,7 @@ import { $push } from "./push";
  * @param {Options} options The options to use for this operation
  * @returns {*}
  */
-export const $addToSet: AccumulatorOperator = (
+export let $addToSet: AccumulatorOperator = (
   collection: AnyObject[],
   expr: Any,
   options: Options
