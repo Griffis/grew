@@ -12,7 +12,7 @@ import { DEFAULT_OPTS, ISODate } from "../../support";
  * See {@link https://www.practical-mongodb-aggregations.com/examples/array-manipulations/array-element-grouping.html}
  */
 describe("Array Element Grouping", () => {
-  const user_rewards = [
+  let user_rewards = [
     {
       userId: 123456789,
       rewards: [
@@ -117,7 +117,7 @@ describe("Array Element Grouping", () => {
     };
   }
 
-  const pipeline = [
+  let pipeline = [
     // Capture new fields grouping elements of each array and remove unwanted fields
     {
       $set: {
