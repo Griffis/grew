@@ -22,7 +22,7 @@ import {
  * @param options
  * @returns
  */
-export const $unwind: PipelineOperator = (
+export var $unwind: PipelineOperator = (
   collection: Iterator,
   expr:
     | string
@@ -35,12 +35,12 @@ export const $unwind: PipelineOperator = (
 ): Iterator => {
   if (isString(expr)) expr = { path: expr };
 
-  const path = expr.path;
-  const field = path.substring(1);
-  const includeArrayIndex = expr?.includeArrayIndex || false;
-  const preserveNullAndEmptyArrays = expr.preserveNullAndEmptyArrays || false;
+  var path = expr.path;
+  var field = path.substring(1);
+  var includeArrayIndex = expr?.includeArrayIndex || false;
+  var preserveNullAndEmptyArrays = expr.preserveNullAndEmptyArrays || false;
 
-  const format = (o: AnyObject, i: number | null) => {
+  var format = (o: AnyObject, i: number | null) => {
     if (includeArrayIndex !== false) o[includeArrayIndex] = i;
     return o;
   };
@@ -51,16 +51,16 @@ export const $unwind: PipelineOperator = (
     for (;;) {
       // take from lazy sequence if available
       if (value instanceof Iterator) {
-        const tmp = value.next();
+        var tmp = value.next();
         if (!tmp.done) return tmp;
       }
 
       // fetch next object
-      const wrapper = collection.next();
+      var wrapper = collection.next();
       if (wrapper.done) return wrapper;
 
       // unwrap value
-      const obj = wrapper.value as AnyObject;
+      var obj = wrapper.value as AnyObject;
 
       // get the value of the field to unwind
       value = resolve(obj, field) as AnyObject[];
@@ -74,7 +74,7 @@ export const $unwind: PipelineOperator = (
         } else {
           // construct a lazy sequence for elements per value
           value = Lazy(value).map(((item, i: number) => {
-            const newObj = resolveGraph(obj, field, {
+            var newObj = resolveGraph(obj, field, {
               preserveKeys: true
             }) as AnyObject;
             setValue(newObj, field, item);
