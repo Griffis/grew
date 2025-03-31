@@ -9,7 +9,7 @@ import { computeDate } from "./_internal";
  * @param obj
  * @param expr
  */
-export const $month: ExpressionOperator<number> = (
+export let $month: ExpressionOperator<number> = (
   obj: AnyObject,
   expr: Any,
   options: Options
