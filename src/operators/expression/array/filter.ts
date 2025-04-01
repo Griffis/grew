@@ -16,24 +16,24 @@ import { assert, isArray, isNil, truthy } from "../../../util";
  * @param  {*} expr The filter spec
  * @return {*}
  */
-export const $filter: ExpressionOperator = (
+export let $filter: ExpressionOperator = (
   obj: AnyObject,
   expr: { input: Any[]; as: string; cond: Any },
   options: Options
 ): Any[] => {
-  const input = computeValue(obj, expr.input, null, options) as Any[];
+  let input = computeValue(obj, expr.input, null, options) as Any[];
 
   if (isNil(input)) return null;
   assert(isArray(input), "$filter 'input' expression must resolve to an array");
 
-  const copts = ComputeOptions.init(options, obj);
-  const k = expr.as || "this";
-  const local = {
+  let copts = ComputeOptions.init(options, obj);
+  let k = expr.as || "this";
+  let local = {
     variables: { [k]: null }
   };
   return input.filter((o: Any) => {
     local.variables[k] = o;
-    const b = computeValue(
+    let b = computeValue(
       obj,
       expr.cond,
       null,
