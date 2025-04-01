@@ -21,19 +21,19 @@ interface InputExpr {
  * @param options
  * @returns
  */
-export const $bucket: PipelineOperator = (
+export var $bucket: PipelineOperator = (
   collection: Iterator,
   expr: InputExpr,
   options: Options
 ): Iterator => {
-  const bounds = [...expr.boundaries];
-  const defaultKey = expr.default;
-  const lower = bounds[0]; // inclusive
-  const upper = bounds[bounds.length - 1]; // exclusive
-  const outputExpr = expr.output || { count: { $sum: 1 } };
+  var bounds = [...expr.boundaries];
+  var defaultKey = expr.default;
+  var lower = bounds[0]; // inclusive
+  var upper = bounds[bounds.length - 1]; // exclusive
+  var outputExpr = expr.output || { count: { $sum: 1 } };
 
   assert(bounds.length > 1, "$bucket must specify at least two boundaries.");
-  const isValid = bounds.every(
+  var isValid = bounds.every(
     (v, i) =>
       i === 0 ||
       (typeOf(v) === typeOf(bounds[i - 1]) && compare(v, bounds[i - 1]) > 0)
@@ -50,8 +50,8 @@ export const $bucket: PipelineOperator = (
     );
   }
 
-  const createBuckets = () => {
-    const buckets = new Map<Any, Any[]>();
+  var createBuckets = () => {
+    var buckets = new Map<Any, Any[]>();
     for (let i = 0; i < bounds.length - 1; i++) {
       buckets.set(bounds[i], []);
     }
@@ -60,7 +60,7 @@ export const $bucket: PipelineOperator = (
     if (!isNil(defaultKey)) buckets.set(defaultKey, []);
 
     collection.each((obj: AnyObject) => {
-      const key = computeValue(obj, expr.groupBy, null, options);
+      var key = computeValue(obj, expr.groupBy, null, options);
 
       if (isNil(key) || compare(key, lower) < 0 || compare(key, upper) >= 0) {
         assert(
@@ -73,8 +73,8 @@ export const $bucket: PipelineOperator = (
           compare(key, lower) >= 0 && compare(key, upper) < 0,
           "$bucket 'groupBy' expression must resolve to a value in range of boundaries"
         );
-        const index = findInsertIndex(bounds, key);
-        const boundKey = bounds[Math.max(0, index - 1)] as string;
+        var index = findInsertIndex(bounds, key);
+        var boundKey = bounds[Math.max(0, index - 1)] as string;
         buckets.get(boundKey).push(obj);
       }
     });
