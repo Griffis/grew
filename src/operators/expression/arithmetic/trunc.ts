@@ -12,14 +12,14 @@ import { truncate } from "./_internal";
  * @param expr
  * @returns {number}
  */
-export const $trunc: ExpressionOperator = (
+export let $trunc: ExpressionOperator = (
   obj: AnyObject,
   expr: Any,
   options: Options
 ): number | null => {
-  const arr = computeValue(obj, expr, null, options) as Any[];
-  const num = arr[0] as number;
-  const places = arr[1] as number;
+  let arr = computeValue(obj, expr, null, options) as Any[];
+  let num = arr[0] as number;
+  let places = arr[1] as number;
   if (isNil(num) || isNaN(num) || Math.abs(num) === Infinity) return num;
   assert(isNumber(num), "$trunc expression must resolve to a number.");
   assert(
