@@ -11,12 +11,12 @@ import { assert, isArray, isNumber } from "../../../util";
  * @param expr
  * @returns {AnyObject}
  */
-export const $pow: ExpressionOperator = (
+export let $pow: ExpressionOperator = (
   obj: AnyObject,
   expr: Any,
   options: Options
 ): number => {
-  const args = computeValue(obj, expr, null, options) as number[];
+  let args = computeValue(obj, expr, null, options) as number[];
 
   assert(
     isArray(args) && args.length === 2 && args.every(isNumber),
