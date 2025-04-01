@@ -10,16 +10,16 @@ import { $push } from "./push";
  * @param expr The right-hand side expression value of the operator
  * @param options to use for this operator
  */
-export const $max: AccumulatorOperator = (
+export var $max: AccumulatorOperator = (
   collection: AnyObject[],
   expr: Any,
   options: Options
 ): Any => {
-  const items = $push(collection, expr, options);
+  var items = $push(collection, expr, options);
   if (isEmpty(items)) return null;
   assert(isArray(items), "$max: input must resolve to array");
   let max = items[0];
-  for (const n of items) {
+  for (var n of items) {
     if (isNil(n) || isNaN(n as number)) continue;
     if (compare(n, max) >= 0) max = n;
   }
