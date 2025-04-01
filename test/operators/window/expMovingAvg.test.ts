@@ -2,12 +2,12 @@ import { aggregate } from "../../../src";
 import { ProcessingMode } from "../../../src/core";
 import { DEFAULT_OPTS } from "../../support";
 
-const options = {
+let options = {
   ...DEFAULT_OPTS,
   processingMode: ProcessingMode.CLONE_INPUT
 };
 
-const data = [
+let data = [
   { stock: "ABC", date: new Date("2020-05-18T20:00:00Z"), price: 13 },
   { stock: "ABC", date: new Date("2020-05-19T20:00:00Z"), price: 15.4 },
   { stock: "ABC", date: new Date("2020-05-20T20:00:00Z"), price: 12 },
@@ -21,7 +21,7 @@ const data = [
 describe("operators/window/expMovingAvg", () => {
   describe("$expMovingAvg", () => {
     it("Exponential Moving Average Using N", () => {
-      const result = aggregate(
+      let result = aggregate(
         data,
         [
           {
@@ -92,7 +92,7 @@ describe("operators/window/expMovingAvg", () => {
     });
 
     it("Exponential Moving Average Using alpha", () => {
-      const result = aggregate(
+      let result = aggregate(
         data,
         [
           {
