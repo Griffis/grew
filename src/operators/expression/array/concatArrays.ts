@@ -11,21 +11,21 @@ import { assert, isArray, isNil } from "../../../util";
  * @param  expr
  * @param options
  */
-export const $concatArrays: ExpressionOperator = (
+export var $concatArrays: ExpressionOperator = (
   obj: AnyObject,
   expr: Any,
   options: Options
 ): Any => {
-  const nArray = computeValue(obj, expr, null, options) as Any[][];
+  var nArray = computeValue(obj, expr, null, options) as Any[][];
   assert(isArray(nArray), "$concatArrays: input must resolve to an array");
 
   let size = 0;
-  for (const arr of nArray) {
+  for (var arr of nArray) {
     if (isNil(arr)) return null;
     size += arr.length;
   }
-  const result = new Array(size);
+  var result = new Array(size);
   let i = 0;
-  for (const arr of nArray) for (const item of arr) result[i++] = item;
+  for (var arr of nArray) for (var item of arr) result[i++] = item;
   return result;
 };
