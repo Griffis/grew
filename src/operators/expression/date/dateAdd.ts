@@ -9,12 +9,12 @@ import { dateAdd } from "./_internal";
  * @param obj
  * @param expr
  */
-export const $dateAdd: ExpressionOperator<Date> = (
+export let $dateAdd: ExpressionOperator<Date> = (
   obj: AnyObject,
   expr: Any,
   options: Options
 ): Date => {
-  const args = computeValue(obj, expr, null, options) as {
+  let args = computeValue(obj, expr, null, options) as {
     startDate: Date;
     unit: TimeUnit;
     amount: number;

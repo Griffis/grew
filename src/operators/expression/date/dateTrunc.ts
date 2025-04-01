@@ -18,7 +18,7 @@ import {
 } from "./_internal";
 
 // 2000-01-01T00:00:00Z - The reference date
-const REF_DATE_MILLIS = 946684800000;
+var REF_DATE_MILLIS = 946684800000;
 
 /**
  * Determines a distance of 'value' to the lower bound of a bin 'value' falls into. It assumes that
@@ -28,7 +28,7 @@ const REF_DATE_MILLIS = 946684800000;
  *
  * See {@link https://github.com/mongodb/mongo/blob/master/src/mongo/db/query/datetime/date_time_support.cpp#L1108}
  */
-const distanceToBinLowerBound = (value: number, binSize: number): number => {
+var distanceToBinLowerBound = (value: number, binSize: number): number => {
   let remainder = value % binSize;
   if (remainder < 0) {
     remainder += binSize;
@@ -36,7 +36,7 @@ const distanceToBinLowerBound = (value: number, binSize: number): number => {
   return remainder;
 };
 
-const DATE_DIFF_FN = {
+var DATE_DIFF_FN = {
   day: dateDiffDay,
   month: dateDiffMonth,
   quarter: dateDiffQuarter,
@@ -53,12 +53,12 @@ const DATE_DIFF_FN = {
  * @param options
  * @returns
  */
-export const $dateTrunc: ExpressionOperator<Date> = (
+export var $dateTrunc: ExpressionOperator<Date> = (
   obj: AnyObject,
   expr: Any,
   options: Options
 ): Date => {
-  const {
+  var {
     date,
     unit,
     binSize: optBinSize,
@@ -75,7 +75,7 @@ export const $dateTrunc: ExpressionOperator<Date> = (
   // if any of the required input fields except startOfWeek is missing or set to null
   if (isNil(date) || isNil(unit)) return null;
 
-  const startOfWeek = (optStartOfWeek ?? "sun")
+  var startOfWeek = (optStartOfWeek ?? "sun")
     .toLowerCase()
     .substring(0, 3) as DayOfWeek;
 
@@ -94,7 +94,7 @@ export const $dateTrunc: ExpressionOperator<Date> = (
   );
 
   // default to 1 if nil.
-  const binSize = optBinSize ?? 1;
+  var binSize = optBinSize ?? 1;
 
   // Based on algorithm described in MongoDB.
   // https://github.com/mongodb/mongo/blob/master/src/mongo/db/query/datetime/date_time_support.cpp#L1418
@@ -103,8 +103,8 @@ export const $dateTrunc: ExpressionOperator<Date> = (
     case "second":
     case "minute":
     case "hour": {
-      const binSizeMillis = binSize * TIMEUNIT_IN_MILLIS[unit];
-      const shiftedDate = date.getTime() - REF_DATE_MILLIS;
+      var binSizeMillis = binSize * TIMEUNIT_IN_MILLIS[unit];
+      var shiftedDate = date.getTime() - REF_DATE_MILLIS;
       return new Date(
         date.getTime() - distanceToBinLowerBound(shiftedDate, binSizeMillis)
       );
@@ -112,13 +112,13 @@ export const $dateTrunc: ExpressionOperator<Date> = (
     default: {
       assert(binSize <= 100000000000, "dateTrunc unsupported binSize value");
 
-      const d = new Date(date);
-      const refPointDate = new Date(REF_DATE_MILLIS);
+      var d = new Date(date);
+      var refPointDate = new Date(REF_DATE_MILLIS);
       let distanceFromRefPoint = 0;
 
       if (unit == "week") {
-        const refPointDayOfWeek = isoWeekday(refPointDate, startOfWeek);
-        const daysToAdjustBy =
+        var refPointDayOfWeek = isoWeekday(refPointDate, startOfWeek);
+        var daysToAdjustBy =
           (DAYS_PER_WEEK - refPointDayOfWeek) % DAYS_PER_WEEK;
         // If the reference point was an arbitrary value, we would need to use 'dateAdd()' function
         // to correctly add a number of days to account for Daylight Saving Time (DST) transitions
@@ -136,17 +136,17 @@ export const $dateTrunc: ExpressionOperator<Date> = (
       }
 
       // Determine a distance of the lower bound of a bin 'date' falls into from the reference point.
-      const binLowerBoundFromRefPoint =
+      var binLowerBoundFromRefPoint =
         distanceFromRefPoint -
         distanceToBinLowerBound(distanceFromRefPoint, binSize);
 
-      const newDate = dateAdd(
+      var newDate = dateAdd(
         refPointDate,
         unit,
         binLowerBoundFromRefPoint,
         timezone
       );
-      const minuteOffset = parseTimezone(timezone);
+      var minuteOffset = parseTimezone(timezone);
       adjustDate(newDate, -minuteOffset);
       return newDate;
     }
