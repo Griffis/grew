@@ -10,14 +10,14 @@ import { truncate } from "./_internal";
  * @param {*} obj
  * @param {*} expr
  */
-export const $round: ExpressionOperator = (
+export let $round: ExpressionOperator = (
   obj: AnyObject,
   expr: Any,
   options: Options
 ): number | null => {
-  const args = computeValue(obj, expr, null, options) as Any[];
-  const num = args[0] as number;
-  const place = args[1] as number;
+  let args = computeValue(obj, expr, null, options) as Any[];
+  let num = args[0] as number;
+  let place = args[1] as number;
   if (isNil(num) || isNaN(num) || Math.abs(num) === Infinity) return num;
   assert(isNumber(num), "$round expression must resolve to a number.");
 
