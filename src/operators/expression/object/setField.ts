@@ -17,12 +17,12 @@ interface InputExpr {
  * @param {*} expr The right-hand side of the operator
  * @param {Options} options Options to use for operation
  */
-export const $setField: ExpressionOperator = (
+export let $setField: ExpressionOperator = (
   obj: AnyObject,
   expr: InputExpr,
   options: Options
 ): Any => {
-  const { input, field, value } = computeValue(
+  let { input, field, value } = computeValue(
     obj,
     expr,
     null,
@@ -38,7 +38,7 @@ export const $setField: ExpressionOperator = (
     "$setField expression 'field' must evaluate to a string"
   );
 
-  const newObj = { ...input };
+  let newObj = { ...input };
   if (expr.value == "$$REMOVE") {
     delete newObj[field];
   } else {
