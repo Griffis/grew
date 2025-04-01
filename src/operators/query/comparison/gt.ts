@@ -5,4 +5,4 @@ import { $gt as __gt, createQueryOperator } from "../../_predicates";
 /**
  * Matches values that are greater than a specified value.
  */
-export const $gt = createQueryOperator(__gt);
+export let $gt = createQueryOperator(__gt);
