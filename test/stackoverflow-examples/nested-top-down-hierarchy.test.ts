@@ -3,7 +3,7 @@ import { aggregate } from "../support";
 // https://stackoverflow.com/a/79174521
 describe("nested top-down hierarchy", () => {
   it("passes", () => {
-    const relations = [
+    let relations = [
       {
         _id: "p_commerce_metrics_dtst_v1",
         category: "dataset",
@@ -53,7 +53,7 @@ describe("nested top-down hierarchy", () => {
       }
     ];
 
-    const result = aggregate(relations, [
+    let result = aggregate(relations, [
       {
         $match: {
           _id: "p_commerce_metrics_dtst_v1"
