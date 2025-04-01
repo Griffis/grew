@@ -11,21 +11,21 @@ import { assert, isNil, isObject, typeOf } from "../../../util";
  * @param {*} expr The right-hand side of the operator
  * @param {Options} options Options to use for operation
  */
-export const $objectToArray: ExpressionOperator = (
+export var $objectToArray: ExpressionOperator = (
   obj: AnyObject,
   expr: Any,
   options: Options
 ): Any => {
-  const val = computeValue(obj, expr, null, options) as AnyObject;
+  var val = computeValue(obj, expr, null, options) as AnyObject;
   if (isNil(val)) return null;
   assert(
     isObject(val),
     `$objectToArray requires a document input, found: ${typeOf(val)}`
   );
-  const entries = Object.entries(val);
-  const result = new Array<Any>(entries.length);
+  var entries = Object.entries(val);
+  var result = new Array<Any>(entries.length);
   let i = 0;
-  for (const [k, v] of entries) {
+  for (var [k, v] of entries) {
     result[i++] = { k, v };
   }
   return result;
