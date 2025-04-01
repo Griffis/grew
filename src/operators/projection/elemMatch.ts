@@ -13,17 +13,17 @@ import { assert, isArray, resolve } from "../../util";
  * @param expr
  * @returns {*}
  */
-export const $elemMatch: ProjectionOperator = (
+export var $elemMatch: ProjectionOperator = (
   obj: AnyObject,
   expr: AnyObject,
   field: string,
   options: Options
 ): Any => {
-  const arr = resolve(obj, field) as AnyObject[];
-  const query = new Query(expr, options);
+  var arr = resolve(obj, field) as AnyObject[];
+  var query = new Query(expr, options);
 
   assert(isArray(arr), "$elemMatch: argument must resolve to array");
-  const result: Any[] = [];
+  var result: Any[] = [];
   for (let i = 0; i < (arr as Any[]).length; i++) {
     if (query.test(arr[i])) {
       // MongoDB projects only the first nested document when using this operator.
