@@ -4,7 +4,7 @@ import { $set } from "../../../src/operators/update";
 
 describe("operators/update/set", () => {
   it("Set Top-Level Fields", () => {
-    const state = {
+    let state = {
       _id: 100,
       quantity: 250,
       instock: true,
@@ -33,7 +33,7 @@ describe("operators/update/set", () => {
   });
 
   it("Set Fields in Embedded Documents", () => {
-    const state = {
+    let state = {
       _id: 100,
       quantity: 500,
       instock: true,
@@ -57,7 +57,7 @@ describe("operators/update/set", () => {
   });
 
   it("Set Elements in Arrays", () => {
-    const state = {
+    let state = {
       _id: 100,
       quantity: 500,
       instock: true,
@@ -84,18 +84,18 @@ describe("operators/update/set", () => {
   });
 
   it("Update All Array Elements That Match arrayFilters", () => {
-    const states = [
+    let states = [
       { _id: 1, grades: [95, 92, 90] },
       { _id: 2, grades: [98, 100, 102] },
       { _id: 3, grades: [95, 110, 100] }
     ];
-    const results = [
+    let results = [
       { _id: 1, grades: [95, 92, 90] },
       { _id: 2, grades: [98, 100, 100] },
       { _id: 3, grades: [95, 100, 100] }
     ];
 
-    const paths = [[], ["grades"], ["grades"]];
+    let paths = [[], ["grades"], ["grades"]];
 
     states.forEach((s, i) => {
       expect(
@@ -106,7 +106,7 @@ describe("operators/update/set", () => {
   });
 
   it("Update All Documents That Match arrayFilters in an Array", () => {
-    const states = [
+    let states = [
       {
         _id: 1,
         grades: [
@@ -124,7 +124,7 @@ describe("operators/update/set", () => {
         ]
       }
     ];
-    const results = [
+    let results = [
       {
         _id: 1,
         grades: [
@@ -150,7 +150,7 @@ describe("operators/update/set", () => {
   });
 
   it("Update Array Elements Using a Negation Operator", () => {
-    const states = [
+    let states = [
       {
         _id: 1,
         name: "Christine Franklin",
@@ -162,7 +162,7 @@ describe("operators/update/set", () => {
         degrees: [{ level: "Bachelor" }]
       }
     ];
-    const results = [
+    let results = [
       {
         _id: 1,
         name: "Christine Franklin",
