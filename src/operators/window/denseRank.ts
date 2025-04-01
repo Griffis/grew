@@ -3,7 +3,7 @@ import { Any, AnyObject, WindowOperatorInput } from "../../types";
 import { rank } from "./_internal";
 
 /** Returns the document position relative to other documents in the $setWindowFields stage partition. */
-export const $denseRank: WindowOperator = (
+export let $denseRank: WindowOperator = (
   obj: AnyObject,
   collection: AnyObject[],
   expr: WindowOperatorInput,
