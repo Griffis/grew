@@ -32,7 +32,7 @@ interface AccumulatorExpr {
  * @param {*} expr The expression for the operator
  * @param {Options} options Options
  */
-export var $accumulator: AccumulatorOperator = (
+export const $accumulator: AccumulatorOperator = (
   collection: AnyObject[],
   expr: AccumulatorExpr,
   options: Options
@@ -44,9 +44,9 @@ export var $accumulator: AccumulatorOperator = (
 
   if (collection.length == 0) return expr.initArgs;
 
-  var copts = ComputeOptions.init(options);
+  const copts = ComputeOptions.init(options);
 
-  var initArgs = computeValue(
+  const initArgs = computeValue(
     {},
     expr.initArgs || [],
     null,
@@ -55,9 +55,9 @@ export var $accumulator: AccumulatorOperator = (
 
   let state = expr.init.call(null, ...initArgs) as Any;
 
-  for (var doc of collection) {
+  for (const doc of collection) {
     // get arguments for document
-    var args = computeValue(
+    const args = computeValue(
       doc,
       expr.accumulateArgs,
       null,
