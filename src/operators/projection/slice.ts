@@ -12,14 +12,14 @@ import { $slice as __slice } from "../expression/array/slice";
  * @param field
  * @param expr
  */
-export const $slice: ProjectionOperator = (
+export let $slice: ProjectionOperator = (
   obj: AnyObject,
   expr: Any,
   field: string,
   options: Options
 ): Any => {
-  const xs = resolve(obj, field);
-  const exprAsArray = expr as Any[];
+  let xs = resolve(obj, field);
+  let exprAsArray = expr as Any[];
 
   if (!isArray(xs)) return xs;
 
