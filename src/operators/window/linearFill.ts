@@ -9,7 +9,7 @@ import { withMemo } from "./_internal";
  * solve for 'y' with: y = y1 + (x - x1) * ((y2 - y1)/(x2 - x1)).
  * @see https://en.wikipedia.org/wiki/Linear_interpolation
  */
-const interpolate = (
+var interpolate = (
   x1: number,
   y1: number,
   x2: number,
@@ -20,7 +20,7 @@ const interpolate = (
 /**
  * Fills null and missing fields in a window using linear interpolation based on surrounding field values.
  */
-export const $linearFill = (
+export var $linearFill = (
   _: AnyObject,
   collection: AnyObject[],
   expr: WindowOperatorInput,
@@ -30,8 +30,8 @@ export const $linearFill = (
     collection,
     expr,
     () => {
-      const sortKey = "$" + Object.keys(expr.parentExpr.sortBy)[0];
-      const points = $push(
+      var sortKey = "$" + Object.keys(expr.parentExpr.sortBy)[0];
+      var points = $push(
         collection,
         [sortKey, expr.inputExpr],
         options
