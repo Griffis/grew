@@ -5,4 +5,4 @@ import { $type as __type, createQueryOperator } from "../../_predicates";
 /**
  * Selects documents if a field is of the specified type.
  */
-export const $type = createQueryOperator(__type);
+export let $type = createQueryOperator(__type);
